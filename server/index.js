@@ -26,18 +26,29 @@ app.post('/create', (reg, res) => {
 		'INSERT INTO employees (name, age, gender, country, position, wage) VALUES (?,?,?,?,?,?)',
 		[name, age, gender, country, position, wage],
 		(err, result) => {
-			if(err)
-			{
+			if (err) {
 				console.log(err)
 			}
-			else
-			{
+			else {
 				res.send("Data odeslána")
 			}
 		}
-		
-		)
 
+	)
+
+})
+
+app.get('/employee', (reg, res) => {
+	db.query('SELECT * FROM employees',
+		(err, result) => {
+			if (err) {
+				console.log(err)
+			}
+			else {
+				res.send(result)
+			}
+		}
+	)
 })
 
 app.listen(3001, () => {
