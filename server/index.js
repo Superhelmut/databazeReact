@@ -51,6 +51,30 @@ app.get('/employee', (reg, res) => {
 	)
 })
 
+app.put('/update', (reg, res) => {
+	const id = reg.body.id
+	const wage = reg.body.wage
+	db.query('UPDATE employees SET wage = ? WHERE id = ?', [wage, id], (err, result) => {
+		if (err) {
+			console.log(err)
+		}
+		else {
+			res.send(result)
+		}
+	})
+})
+
+app.delete("/delete/:id", (req, res) => {
+	const id = req.params.id;
+	db.query("DELETE FROM employees WHERE id = ?", id, (err, result) => {
+	  if (err) {
+		console.log(err);
+	  } else {
+		res.send(result);
+	  }
+	});
+  });
+
 app.listen(3001, () => {
 	console.log("tvůj server běží na portu 3001 ")
 })
